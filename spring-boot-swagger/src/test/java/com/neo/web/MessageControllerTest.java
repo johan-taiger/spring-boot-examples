@@ -3,6 +3,8 @@ package com.neo.web;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,6 +28,8 @@ public class MessageControllerTest {
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
+
+    private Logger log = LoggerFactory.getLogger(MessageControllerTest.class);
 
     @Before
     public void setup() {
@@ -97,7 +101,7 @@ public class MessageControllerTest {
                 MvcResult mvcResult=  mockMvc.perform(MockMvcRequestBuilders.post("/message")
                         .params(params)).andReturn();
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("Error: {}",e);
             }
         }
     }
